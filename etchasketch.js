@@ -1,6 +1,21 @@
 const container = document.querySelector("#container");
+const button = document.querySelector("button");
+const buttonContainer = document.querySelector("#buttonContainer");
 const body = document.querySelector("body");
-const gridSize = 16;
+
+buttonContainer.style.textAlign = "center";
+
+let gridSize = 16;
+
+button.addEventListener("click", () => {
+    gridSize = prompt("Enter the size of the grid(1-100): ");
+    gridSize = gridSize > 100 ? 100 : gridSize < 1 ? 1 : gridSize;
+    console.log(gridSize);
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    initializeGrid();
+});
 
 function initializeGrid () {
     body.style.margin = "0 auto";
@@ -18,13 +33,20 @@ function initializeGrid () {
 
         for(let n = 0; n < gridSize; n++) {
             let newDiv = document.createElement("div");
-            newDiv.style.display = "flex";
-            //newDiv.style.justifyContent = "stretch";
-            newDiv.style.flex = 1;
-            //newDiv.style.width = "100% / 16";
-            //newDiv.style.height = "100% / 16";
+            newDiv.style.display = "flex";            
+            newDiv.style.flex = 1;            
             newDiv.style.backgroundColor = "grey";
-            newDiv.style.border = "1px solid black";
+            newDiv.dataset.light = 1;
+            newDiv.addEventListener("mouseover", () => {
+                let r = (Math.floor(Math.random() * 255));
+                let g = (Math.floor(Math.random() * 255));
+                let b = (Math.floor(Math.random() * 255));
+                newDiv.style.backgroundColor = `rgb(${r},${g},${b}`;
+                newDiv.style.filter = `brightness(${newDiv.dataset.light})`;
+                console.log(newDiv.dataset.light);
+                newDiv.dataset.light -= .1;   
+                console.log(newDiv.dataset.light);             
+            });
             row.appendChild(newDiv);
         }
     }
