@@ -2,9 +2,12 @@ const container = document.querySelector("#container");
 const button = document.querySelector("button");
 const buttonContainer = document.querySelector("#buttonContainer");
 const body = document.querySelector("body");
-
+container.style.maxWidth = "600px";
+container.style.maxHeight = "auto";
+container.style.border = "2px solid black";
 buttonContainer.style.textAlign = "center";
-
+buttonContainer.style.paddingBottom = "100px";
+buttonContainer.style.paddingTop = "100px";
 let gridSize = 16;
 
 button.addEventListener("click", () => {
@@ -20,10 +23,12 @@ button.addEventListener("click", () => {
 function initializeGrid () {
     body.style.margin = "0 auto";
     body.style.padding = "0";
+    body.style.textAlign = "-webkit-center";
     container.style.display = "flex";
     container.style.flexDirection = "row";
-    container.style.height = "100vh";
-    container.style.width = "100vw";
+    container.style.height = "50vh";
+    container.style.width = "auto";
+    container.style.justifyContent = "center";
     for(let i = 0; i < gridSize; i++) {
         const row = document.createElement("div");
         row.style.display = "flex";
